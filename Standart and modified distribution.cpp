@@ -20,49 +20,49 @@
 		return Std_distr::v;
 	}
 
-	double Std_distr::Density_calc(double x, double v) {
-		double density = (v / (2 * tgamma(1 / v)) * exp(-pow(abs(x), v)));
+	double Std_distr::Density_calc(double x) {
+		double density = (Std_distr::v / (2 * tgamma(1 / Std_distr::v)) * exp(-pow(abs(x), Std_distr::v)));
 		/*double density = (v / (2 * tgamma(1 / v)) * exp(exp(v * (-log(abs(x))))));*/
 		return density;
 	}
 
-	double Std_distr::Standart(double x, double l, double u) {
-		double xmod = ((x - u) / l);
+	double Std_distr::Standart(double x) {
+		double xmod = ((x - Std_distr::u) / Std_distr::l);
 		return xmod;
 	}
 
-	double Std_distr::Modified_Density_calc(double x, /*double v,*/ double u, double l) {
-		double xmod = Standart(x, l, u);
-		double mod_density = (Std_distr::v / (2 * tgamma(1 / Std_distr::v)) * exp(-pow(abs(xmod), Std_distr::v))) / l;
+	double Std_distr::Modified_Density_calc(double x) {
+		double xmod = Standart(x);
+		double mod_density = (Std_distr::v / (2 * tgamma(1 / Std_distr::v)) * exp(-pow(abs(xmod), Std_distr::v))) / Std_distr::l;
 		//double mod_density = (v / (2 * tgamma(1 / v)) * exp(exp(v*(-log(abs(x)))))) / l;
 		return mod_density;
 	}
 	double Std_distr::Expected_value() { return 0; }
 
-	double Std_distr::Modified_Expected_value_calc(double u) {
-		double mod_expected_value = Expected_value() + u;
+	double Std_distr::Modified_Expected_value_calc() {
+		double mod_expected_value = Expected_value() + Std_distr::u;
 		return mod_expected_value;
 	}
 
-	double Std_distr::Dispersion_calc(double v) {
-		double dispersion = (tgamma(3 / v) / tgamma(1 / v));
+	double Std_distr::Dispersion_calc() {
+		double dispersion = (tgamma(3 / Std_distr::v) / tgamma(1 / Std_distr::v));
 		return dispersion;
 	}
 
-	double Std_distr::Modified_Dispersion_calc(double v, double l) {
-		double mod_dispersion = (tgamma(3 / v) / tgamma(1 / v)) * pow(l, 2);
+	double Std_distr::Modified_Dispersion_calc() {
+		double mod_dispersion = (tgamma(3 / Std_distr::v) / tgamma(1 / Std_distr::v)) * pow(Std_distr::l, 2);
 		return mod_dispersion;
 	}
 
-	double Std_distr::Excess_calc(double v) {
-		double excess = ((tgamma(5 / v) * tgamma(1 / v) / pow(tgamma(3 / v), 2)) - 3);
+	double Std_distr::Excess_calc() {
+		double excess = ((tgamma(5 / Std_distr::v) * tgamma(1 / Std_distr::v) / pow(tgamma(3 / Std_distr::v), 2)) - 3);
 		return excess;
 	}
 
 	double Std_distr::Asymmetry_calc() { return 0; }
 
-	std::vector<double> Std_distr::Modified_Func_calc(double x, double v, double u, double l) { //подсчет всех параметров для модифицированной функции
-		std::vector<double> vec = { Modified_Dispersion_calc(v, l), Excess_calc(v), Modified_Density_calc(x,/*v,*/u,l), Modified_Expected_value_calc(v) };
+	std::vector<double> Std_distr::Modified_Func_calc(double x) { //подсчет всех параметров для модифицированной функции
+		std::vector<double> vec = { Modified_Dispersion_calc(), Excess_calc(), Modified_Density_calc(x), Modified_Expected_value_calc() };
 		return vec;
 	}
 	double Std_distr::Randomizer() {
@@ -72,11 +72,11 @@
 	}
 
 														// part of an algorithm for v in range [1;2)
-	double Std_distr::Random_item12(double v) {
+	double Std_distr::Random_item12() {
 		double r = Randomizer();
-		double a = (1 / v) - 1;
+		double a = (1 / Std_distr::v) - 1;
 		//double b = 1 / (exp((1 / v) * log(v)));
-		double b = 1 / (pow(v, 1 / v));
+		double b = 1 / (pow(Std_distr::v, 1 / Std_distr::v));
 		double x = 0;
 		if (r <= 0.5) {
 			x = b * log(2 * r);
@@ -85,46 +85,46 @@
 			x = -b * log(2 * (1 - r));
 		}
 		double r2 = Randomizer();
-		if (log(r2) <= (exp(v * (-log(abs(x)))) + (abs(x) / b) + a)) { return x; }
+		if (log(r2) <= (exp(Std_distr::v * (-log(abs(x)))) + (abs(x) / b) + a)) { return x; }
 		//if (log(r2) <= (-pow(abs(x), v) + (abs(x) / b) + a)) { return x; }
-		else { return  Random_item12(v); }
+		else { return  Random_item12(); }
 	}
 
 													// part of an algorithm for v in range [2; inf)
-	double Std_distr::Random_item2(double v) {
-		double a = (1 / v) - 0.5;
+	double Std_distr::Random_item2() {
+		double a = (1 / Std_distr::v) - 0.5;
 		//double b = 1 / (exp((1 / v) * log(v)));
-		double b = 1 / (pow(v, 1 / v));
+		double b = 1 / (pow(Std_distr::v, 1 / Std_distr::v));
 		double c = 2 * pow(b, 2);
 		double r = Randomizer();
 		double r2 = Randomizer();
 		double x = b * sqrt(-2 * log(r)) * cos(2 * M_PI * r2);
 		double r3 = Randomizer();
-		if (log(r3) <= (exp(v * (-log(abs(x)))) + (pow(x, 2) / c) + a)) { return x; }
+		if (log(r3) <= (exp(Std_distr::v * (-log(abs(x)))) + (pow(x, 2) / c) + a)) { return x; }
 		/*if (log(r3) <= (-pow(abs(x), v) + (pow(x, 2) / c) + a)) { return x; }*/
-		else { return Random_item2(v); }
+		else { return Random_item2(); }
 	}
 													// function for the whole algorithm use
-	double Std_distr::Random_item(double v, double u, double l) {
+	double Std_distr::Random_item() {
 		double result;
-		if ((1 <= v) && (v < 2)) { result = Random_item12(v); }
-		else if (v >= 2) { result = Random_item2(v); }
-		return ((result * l + u));
+		if ((1 <= Std_distr::v) && (Std_distr::v < 2)) { result = Random_item12(); }
+		else if (Std_distr::v >= 2) { result = Random_item2(); }
+		return ((result * Std_distr::l + Std_distr::u));
 	}
 
-	std::vector<double> Std_distr::Create_std_set(const int n, double v, double u, double l) {
+	std::vector<double> Std_distr::Create_std_set(const int n) {
 		std::vector<double> result;
 		for (int i = 0; i < n; i++) {
-			result.push_back(Random_item(v, u, l));
+			result.push_back(Random_item());
 		}
 		sort(result.begin(), result.end());
 		return result;
 	}
 
-	std::vector<std::pair<double, double>> Std_distr::Create_std_graph(std::vector<double> vec, double v, double u, double l, const int n) {
+	std::vector<std::pair<double, double>> Std_distr::Create_std_graph(std::vector<double> vec, const int n) {
 		std::vector<std::pair<double, double>> result;
 		for (int i = 0; i < n; ++i) {
-			result.push_back(std::make_pair(vec[i], Modified_Density_calc(vec[i],/* v,*/ u, l)));
+			result.push_back(std::make_pair(vec[i], Modified_Density_calc(vec[i])));
 		}
 		return result;
 	}

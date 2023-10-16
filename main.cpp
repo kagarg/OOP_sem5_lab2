@@ -71,8 +71,8 @@ int main() {
 	distr.set_form(v);
 	distr.set_shift(u1);
 	distr.set_scale(l1);
-	auto vec = distr.Create_std_set(1000, v, u1, l1);
-	auto func = distr.Create_std_graph(vec, v, u1, l1, 1000);
+	auto vec = distr.Create_std_set(1000);
+	auto func = distr.Create_std_graph(vec, 1000);
 	std::ofstream file1("standart_distr.txt");
 	for (int i = 0; i < func.size(); ++i) {
 		file1 << func[i].first << "\t" << func[i].second << std::endl;
@@ -80,20 +80,20 @@ int main() {
 
 														// output console print
 	std::cout << "Для стандартного распределения ";
-	std::cout << "Дисперсия равна: " << distr.Modified_Dispersion_calc(v, l1) << std::endl
-			  << "Эксцесс:  " << distr.Excess_calc(v) << std::endl
-			  << "Плотность распределения в точке " << u1 << " равна: " << distr.Modified_Density_calc(u1, /*v,*/ u1, l1) << std::endl
-			  << "Мат. Ожидание:  "<< distr.Modified_Expected_value_calc(u1) << std::endl
+	std::cout << "Дисперсия равна: " << distr.Modified_Dispersion_calc() << std::endl
+			  << "Эксцесс:  " << distr.Excess_calc() << std::endl
+			  << "Плотность распределения в точке " << u1 << " равна: " << distr.Modified_Density_calc(u1) << std::endl
+			  << "Мат. Ожидание:  "<< distr.Modified_Expected_value_calc() << std::endl
 			  << "Асимметрия:  " << distr.Asymmetry_calc() << std::endl;
 
 														// output data save
 	std::ofstream out("output.txt"); // окрываем файл для чтения
 	if (out.is_open())
 	{
-		out << "Дисперсия равна: " << distr.Modified_Dispersion_calc(v, l1) << std::endl
-			<< "Эксцесс:  " << distr.Excess_calc(v) << std::endl
-			<< "Плотность распределения в точке " << u1 << " равна: " << distr.Modified_Density_calc(u1,/* v,*/ u1, l1) << std::endl
-			<< "Мат. Ожидание:  " << distr.Modified_Expected_value_calc(u1) << std::endl
+		out << "Дисперсия равна: " << distr.Modified_Dispersion_calc() << std::endl
+			<< "Эксцесс:  " << distr.Excess_calc() << std::endl
+			<< "Плотность распределения в точке " << u1 << " равна: " << distr.Modified_Density_calc(u1) << std::endl
+			<< "Мат. Ожидание:  " << distr.Modified_Expected_value_calc() << std::endl
 			<< "Асимметрия:  " << distr.Asymmetry_calc() << std::endl;
 	}
 	out.close();     // закрываем файл

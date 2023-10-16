@@ -31,33 +31,33 @@ public:
 	double get_shift();
 	double get_scale();
 	double get_form();
-	double Density_calc(double x, double v);
+	double Density_calc(double x);
 
-	double Standart(double x, double l, double u);
+	double Standart(double x);
 
-	double Modified_Density_calc(double x,/* double v,*/ double u, double l);
+	double Modified_Density_calc(double x);
 	double Expected_value();
 
-	double Modified_Expected_value_calc(double u);
+	double Modified_Expected_value_calc();
 
-	double Dispersion_calc(double v);
+	double Dispersion_calc();
 
-	double Modified_Dispersion_calc(double v, double l);
+	double Modified_Dispersion_calc();
 
-	double Excess_calc(double v);
+	double Excess_calc();
 
 	double Asymmetry_calc();
 
-	std::vector<double> Modified_Func_calc(double x, double v, double u, double l);
+	std::vector<double> Modified_Func_calc(double x);
 	double Randomizer();
 	// part of an algorithm for v in range [1;2)
-	double Random_item12(double v);
+	double Random_item12();
 	// part of an algorithm for v in range [2; inf)
-	double Random_item2(double v);
+	double Random_item2();
 	// function for the whole algorithm use
-	double Random_item(double v, double u, double l);
+	double Random_item();
 
-	std::vector<double> Create_std_set(const int n, double v, double u, double l);
+	std::vector<double> Create_std_set(const int n);
 
-	std::vector<std::pair<double, double>> Create_std_graph(std::vector<double> vec, double v, double u, double l, const int n);
+	std::vector<std::pair<double, double>> Create_std_graph(std::vector<double> vec,const int n);
 };
