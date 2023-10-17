@@ -11,7 +11,18 @@
 class Std_distr {
 private:
 	double u, l, v;
-
+	double Standart(double x);
+	double Density_calc(double x);
+	double Dispersion_calc();
+	double Expected_value();
+	double Randomizer();
+	// part of an algorithm for v in range [1;2)
+	double Random_item12();
+	// part of an algorithm for v in range [2; inf)
+	double Random_item2();
+	// function for the whole algorithm use
+	double Random_item();
+	
 public:
 	Std_distr() {
 		u = 1;
@@ -67,33 +78,12 @@ public:
 	double get_shift();
 	double get_scale();
 	double get_form();
-	double Density_calc(double x);
-
-	double Standart(double x);
-
 	double Modified_Density_calc(double x);
-	double Expected_value();
-
 	double Modified_Expected_value_calc();
-
-	double Dispersion_calc();
-
 	double Modified_Dispersion_calc();
-
 	double Excess_calc();
-
 	double Asymmetry_calc();
-
 	std::vector<double> Modified_Func_calc(double x);
-	double Randomizer();
-	// part of an algorithm for v in range [1;2)
-	double Random_item12();
-	// part of an algorithm for v in range [2; inf)
-	double Random_item2();
-	// function for the whole algorithm use
-	double Random_item();
-
 	std::vector<double> Create_std_set(const int n);
-
 	std::vector<std::pair<double, double>> Create_std_graph(std::vector<double> vec,const int n);
 };

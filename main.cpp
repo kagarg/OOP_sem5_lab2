@@ -62,7 +62,7 @@ int main() {
 			while (std::cin.fail()) {							// проверка вводимых данных
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << "Ошибка ввода. Введите значения повторно > ";
+				std::cout << "Ошибка ввода. Введите значения повторно. > ";
 				std::cin >> v >> l1 >> u1;
 			}
 			while (v <= 0) {
