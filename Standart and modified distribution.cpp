@@ -6,6 +6,7 @@
 	void Std_distr::set_scale(double scale) {
 		Std_distr::l = scale;
 	}
+	
 	void Std_distr::set_form(double form) {
 		Std_distr::v = form;
 	}
@@ -106,7 +107,7 @@
 	}
 													// function for the whole algorithm use
 	double Std_distr::Random_item() {
-		double result;
+		double result=0;/////////////////////////////////
 		if ((1 <= Std_distr::v) && (Std_distr::v < 2)) { result = Random_item12(); }
 		else if (Std_distr::v >= 2) { result = Random_item2(); }
 		return ((result * Std_distr::l + Std_distr::u));
