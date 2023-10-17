@@ -2,16 +2,7 @@
 
 
 int main() {
-	try {
-
-	}
-	catch (std::range_error ex) {
-		std::cout << "Error:  " << ex.what();
-	}
-	catch (std::runtime_error ex) {
-		std::cout << "Error while working with files: " << ex.what();
-	}
-
+	
 	setlocale(LC_ALL, "ru");
 	srand((unsigned)time(0));
 	double v, l1, u1;
