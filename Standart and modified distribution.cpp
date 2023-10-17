@@ -62,10 +62,6 @@
 
 	double Std_distr::Asymmetry_calc() { return 0; }
 
-	std::vector<double> Std_distr::Modified_Func_calc(double x) { //подсчет всех параметров для модифицированной функции
-		std::vector<double> vec = { Modified_Dispersion_calc(), Excess_calc(), Modified_Density_calc(x), Modified_Expected_value_calc() };
-		return vec;
-	}
 	double Std_distr::Randomizer() {
 		double r;
 		do r = (double)rand() / RAND_MAX; while (r == 0 || r == 1);

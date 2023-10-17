@@ -83,7 +83,6 @@ public:
 	double Modified_Dispersion_calc();
 	double Excess_calc();
 	double Asymmetry_calc();
-	std::vector<double> Modified_Func_calc(double x);
 	std::vector<double> Create_std_set(const int n);
 	std::vector<std::pair<double, double>> Create_std_graph(std::vector<double> vec,const int n);
 };
