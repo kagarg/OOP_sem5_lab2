@@ -57,7 +57,7 @@ int main() {
 
 		case 1:
 		{
-			std::cout << "¬ведите: v (v > 0), l, u> ";
+			std::cout << "¬ведите: v (v >= 1), l, u> ";
 			std::cin >> v >> l1 >> u1;
 			while (std::cin.fail()) {							// проверка вводимых данных
 				std::cin.clear();
@@ -65,7 +65,7 @@ int main() {
 				std::cout << "ќшибка ввода. ¬ведите значени€ повторно. > ";
 				std::cin >> v >> l1 >> u1;
 			}
-			while (v <= 0) {
+			while (v < 1) {
 				std::cout << "ќшибка в значении параметра формы. ¬ведите значение повтороно > ";
 				std::cin >> v;
 			}
