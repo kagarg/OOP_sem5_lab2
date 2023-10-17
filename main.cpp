@@ -1,6 +1,5 @@
 #include "Header.h"
-#include <fstream>
-#include <string>
+
 
 int main() {
 	setlocale(LC_ALL, "ru");
